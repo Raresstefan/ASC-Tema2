@@ -8,7 +8,6 @@
  * Add your unoptimized implementation here
  */
 double* my_solver(int N, double *A, double* B) {
-	printf("NEOPT SOLVER\n");
 	double *C = calloc(N * N, sizeof(double));
 	for (int i = 0; i < N; i++) {
 		for (int j = i; j < N; j++) {
