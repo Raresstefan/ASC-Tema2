@@ -13,7 +13,6 @@ double* my_solver(int N, double *A, double* B) {
 	double *AB = calloc(N * N, sizeof(double));
 	double *ABA_T = calloc(N * N, sizeof(double));
 	double *B_T_B_T = calloc(N * N, sizeof(double));
-	double *B_T = calloc(N * N, sizeof(double));
 
 	// compute A * B and store result in AB
 	for (int i = 0; i < N; i++) {
