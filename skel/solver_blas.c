@@ -14,23 +14,14 @@ double* my_solver(int N, double *A, double *B) {
 	double *ABA_T = calloc(N * N, sizeof(double));
 	double *B_T_B_T = calloc(N * N, sizeof(double));
 	double *B_T = calloc(N * N, sizeof(double));
-	memcpy(AB, B, N * N * sizeof(double));
-	// AB = A * AB = A * B
-	cblas_dtrmm(CblasRowMajor, CblasLeft, CblasUpper, CblasNoTrans, CblasNonUnit, N, N, 1.0, A, N, AB, N);
+	// AB = A * B
+	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, 1.0, A, N, B, N, 1.0, AB, N);
 
 	// ABA_T = AB * A_T
-	memcpy(ABA_T, AB, N * N * sizeof(double));
-	cblas_dtrmm(CblasRowMajor, CblasRight, CblasUpper, CblasTrans, CblasNonUnit, N, N, 1.0, A, N, ABA_T, N);
+	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasTrans, N, N, N, 1.0, AB, N, A, N, 1.0, ABA_T, N);
 
 	// calculate B_T, B_T_B_T = B_T
-	for (int i = 0; i < N; i++) {
-		for (int j = i; j < N; j++) {
-			B_T[i * N + j] = B[j * N + i];
-		}
-	}
-	memcpy(B_T_B_T, B_T, N * N * sizeof(double));
-
-	cblas_dtrmm(CblasRowMajor, CblasLeft, CblasUpper, CblasNoTrans, CblasNonUnit, N, N, 1.0, B_T, N, B_T_B_T, N);
+	cblas_dgemm(CblasRowMajor, CblasTrans, CblasTrans, N, N, N, 1.0, B, N, B, N, 1.0, B_T_B_T, N);
 
 	for (int i = 0; i < N;i ++) {
 		for (int j = i; j < N; j++) {

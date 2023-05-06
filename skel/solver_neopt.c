@@ -19,7 +19,7 @@ double* my_solver(int N, double *A, double* B) {
 		for (int j = i; j < N; j++) {
 			double sum = 0;
 			for (int k = i; k <= j; k++) {
-				if (A[i * N + k] != 0 && B[k * N + j] != 0) {
+				if (i <= k) {
 					sum += A[i * N + k] * B[k * N + j];
 				}
 			}
@@ -30,14 +30,16 @@ double* my_solver(int N, double *A, double* B) {
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < N; j++) {
 			for (int k = j; k < N; k++) {
-				ABA_T[i * N + j] += AB[i * N + k] * A[j * N + k];
+				if (j <= k) {
+					ABA_T[i * N + j] += AB[i * N + k] * A[j * N + k];
+				}
 			}
 		}
 	}
 	// B_T
 	for (int i = 0; i < N; i++) {
 		for (int j = i; j < N; j++) {
-			B_T[i * N + j] = B[j * N + i];
+			B_T[j * N + i] = B[i * N + j];
 		}
 	}
 	// B_T * B_T
