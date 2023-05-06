@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
-#include "cblas.h"
+#include <cblas.h>
 
 typedef double* (*Solver)(int, double *, double*);
 
