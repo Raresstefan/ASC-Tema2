@@ -42,9 +42,9 @@ double* my_solver(int N, double *A, double* B) {
 	}
 	// B_T * B_T
 	for (int i = 0; i < N; i++) {
-		for (int j = i; j < N; j++) {
+		for (int j = 0; j <= i; j++) {
 			double sum = 0;
-			for (int k = i; k <= j; k++) {
+			for (int k = 0; k <= j; k++) {
 				if (B_T[i * N + k] != 0 && B_T[k * N + j] != 0) {
 					sum += B_T[i * N + k] * B_T[k * N + j];
 				}
