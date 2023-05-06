@@ -52,5 +52,8 @@ double* my_solver(int N, double *A, double* B) {
 			C[i * N + j] = ABA_T[i * N + j] + B_T_B_T[i * N + j];
 		}
 	}
+	free(AB);
+	free(ABA_T);
+	free(B_T_B_T);
 	return C;
 }
