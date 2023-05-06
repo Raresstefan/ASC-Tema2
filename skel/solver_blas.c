@@ -14,15 +14,25 @@ double* my_solver(int N, double *A, double *B) {
 	double *ABA_T = calloc(N * N, sizeof(double));
 	double *B_T_B_T = calloc(N * N, sizeof(double));
 	double *B_T = calloc(N * N, sizeof(double));
+	// // AB = A * B
+	// cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, 1.0, A, N, B, N, 1.0, AB, N);
+
+	// // ABA_T = AB * A_T
+	// cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasTrans, N, N, N, 1.0, AB, N, A, N, 1.0, ABA_T, N);
+
+	// // calculate B_T, B_T_B_T = B_T
+	// cblas_dgemm(CblasRowMajor, CblasTrans, CblasTrans, N, N, N, 1.0, B, N, B, N, 1.0, B_T_B_T, N);
+
 	// AB = A * B
-	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, 1.0, A, N, B, N, 1.0, AB, N);
+	memcpy(AB, B, N * N * sizeof(double));
+	cblas_dtrmm(CblasRowMajor, CblasLeft, CblasUpper, CblasNoTrans, CblasNonUnit, N, N, 1.0, A, N, AB, N);
 
 	// ABA_T = AB * A_T
-	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasTrans, N, N, N, 1.0, AB, N, A, N, 1.0, ABA_T, N);
+	memcpy(ABA_T, AB, N * N * sizeof(double));
+	cblas_dtrmm(CblasRowMajor, CblasRight, CblasUpper, CblasTrans, CblasNonUnit, N, N, 1.0, A, N, ABA_T, N);
 
-	// calculate B_T, B_T_B_T = B_T
+	// B_T_B_T = B_T * B_T
 	cblas_dgemm(CblasRowMajor, CblasTrans, CblasTrans, N, N, N, 1.0, B, N, B, N, 1.0, B_T_B_T, N);
-
 	for (int i = 0; i < N;i ++) {
 		for (int j = 0; j < N; j++) {
 			C[i * N + j] = ABA_T[i * N + j] + B_T_B_T[i * N + j];
