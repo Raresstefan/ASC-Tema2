@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -Werror -O0
-LIBDIRS=
+LIBDIRS=-L /usr/lib64/atlas
 LIBS=-l:libsatlas.so.3.10
 
 all: compare tema2_blas tema2_neopt tema2_opt_m 
