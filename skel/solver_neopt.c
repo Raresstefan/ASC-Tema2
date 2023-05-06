@@ -38,25 +38,23 @@ double* my_solver(int N, double *A, double* B) {
 	}
 	// B_T
 	for (int i = 0; i < N; i++) {
-		for (int j = i; j < N; j++) {
-			B_T[j * N + i] = B[i * N + j];
+		for (int j = 0; j < N; j++) {
+			B_T[i * N + j] = B[j * N + i];
 		}
 	}
 	// B_T * B_T
 	for (int i = 0; i < N; i++) {
-		for (int j = 0; j <= i; j++) {
+		for (int j = 0; j <= N; j++) {
 			double sum = 0;
-			for (int k = 0; k <= j; k++) {
-				if (B_T[i * N + k] != 0 && B_T[k * N + j] != 0) {
-					sum += B_T[i * N + k] * B_T[k * N + j];
-				}
+			for (int k = 0; k <= N; k++) {
+				sum += B_T[i * N + k] * B_T[k * N + j];
 			}
 			B_T_B_T[i * N + j] = sum;
 		}
 	}
 	// ABA_T + B_T_B_T
 	for (int i = 0; i < N; i++) {
-		for (int j = i; j < N; j++) {
+		for (int j = 0; j < N; j++) {
 			C[i * N + j] = ABA_T[i * N + j] + B_T_B_T[i * N + j];
 		}
 	}
