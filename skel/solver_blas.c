@@ -3,7 +3,6 @@
  * 2023 Spring
  */
 #include "utils.h"
-#include "cblas.h"
 /* 
  * Add your BLAS implementation here
  */
