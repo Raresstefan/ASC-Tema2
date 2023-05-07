@@ -9,6 +9,7 @@
  */
 	
 double* my_solver(int N, double *A, double* B) {
+	printf("NEOPT SOLVER\n");
 	double *C = malloc(N * N * sizeof(double));
 	double *AB = calloc(N * N, sizeof(double));
 	double *ABA_T = calloc(N * N, sizeof(double));
