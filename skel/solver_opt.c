@@ -14,7 +14,6 @@ double* my_solver(int N, double *A, double* B) {
 	double *ABA_T = calloc(N * N, sizeof(double));
 	register double *A_line = NULL;
 	register double *AB_line = NULL;
-	register double *ABA_T_line = NULL;
 	
 	// compute A * B and store result in AB
 	for (register int i = 0; i < N; i++) {
