@@ -20,11 +20,11 @@ double* my_solver(int N, double *A, double* B) {
 		A_line = A + i * N + i;
 		C = AB + i * N;
 		for (register int j = 0; j < N; j++) {
-			register double *B_col = B + i * N + j;
 			register double *A_line_aux = A_line;
+			register double *B_col = B + i * N + j;
 			register double sum = 0;
 			for (register int k = i; k < N; k++) {
-				sum += *A_line_aux * *(B_col);
+				sum += *A_line_aux * *B_col;
 				B_col += N;
 				A_line_aux++;
 			}
@@ -53,7 +53,7 @@ double* my_solver(int N, double *A, double* B) {
 
 	// compute ABA_T + B_T * B_T and store result in C
 	for (register int i = 0; i < N; i++) {
-		register double *B_line_i = B + i * N;
+		register double *B_line_i = &B[i];
 		C = ABA_T + i * N;
 		for (register int j = 0; j < N; j++) {
 			register double *B_line_aux = B_line_i;
