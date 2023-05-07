@@ -69,6 +69,5 @@ double* my_solver(int N, double *A, double* B) {
 		}
 	}
 	free(AB);
-	free(C);
 	return ABA_T;	
 }
