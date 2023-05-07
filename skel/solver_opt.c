@@ -9,7 +9,7 @@
  */
 double* my_solver(int N, double *A, double* B) {
 	printf("OPT SOLVER\n");
-	double *C = malloc(N * N * sizeof(double));
+	register double *C = NULL;
 	double *AB = calloc(N * N, sizeof(double));
 	double *ABA_T = calloc(N * N, sizeof(double));
 	register double *A_line = NULL;
