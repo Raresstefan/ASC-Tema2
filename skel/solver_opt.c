@@ -28,8 +28,8 @@ double* my_solver(int N, double *A, double* B) {
 				B_col += N;
 				A_line_aux++;
 			}
-			*AB_line = sum;
-			AB_line++;
+			*C = sum;
+			C++;
 		}
 	}
 
@@ -61,7 +61,7 @@ double* my_solver(int N, double *A, double* B) {
 			register double sum = *C;
 			for (register int k = 0; k < N; k++) {
 				sum += *B_line_aux * *B_line_j;
-				B_line_aux++;
+				B_line_aux += N;
 				B_line_j++;
 			}
 			*C = sum;
